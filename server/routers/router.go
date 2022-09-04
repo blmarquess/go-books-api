@@ -11,7 +11,7 @@ func ConfigRoutes(router *gin.Engine) *gin.Engine {
 		books := main.Group("books")
 		{
 			books.GET("/", controllers.GetAllBooks)
-			books.GET("/:id")
+			books.GET("/:id", controllers.GetBook)
 			books.POST("/")
 			books.PUT("/")
 			books.DELETE("/")
