@@ -50,17 +50,22 @@ func GetBook(ctx *gin.Context) {
 func CreateBook(ctx *gin.Context) {
 	db := database.GetDBInstance()
 	var book models.Book
-	err := ctx.ShouldBindJSON(&book)
 
-	if err != nil {
+	if err := ctx.ShouldBindJSON(&book); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "Invalid JSON",
 		})
 		return
 	}
 
-	err = db.Create(&book).Error
-	if err != nil {
+	if err := book.Validate(); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": err.Error(),
+		})
+		return
+	}
+
+	if err := db.Create(&book).Error; err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Error on save data",
 		})
