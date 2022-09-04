@@ -27,6 +27,7 @@ services:
       DB_USER: golang
       DB_PASSWORD: password
       DB_NAME: books_api
+      PORT: 8000
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8000/books" ]
       timeout: 10s
