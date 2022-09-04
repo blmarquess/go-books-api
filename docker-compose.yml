@@ -14,3 +14,22 @@ services:
       timeout: 10s
       retries: 5
       interval: 30s
+  server:
+    container_name: api_goLang
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db_postgres
+      DB_PORT: 5432
+      DB_USER: golang
+      DB_PASSWORD: password
+      DB_NAME: books_api
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/books" ]
+      timeout: 10s
+      retries: 5
+      interval: 30s
+    restart: always
