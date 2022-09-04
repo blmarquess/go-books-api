@@ -1,7 +1,9 @@
 package database
 
 import (
+	"fmt"
 	"log"
+	"os"
 
 	"github.com/blmarquess/go-books-api/models"
 	"gorm.io/driver/postgres"
@@ -11,7 +13,8 @@ import (
 var db *gorm.DB
 
 func StartDB() {
-	dsn := "host=localhost user=golang password=password dbname=books_api port=5432 sslmode=disable TimeZone=America/Sao_Paulo"
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=America/Sao_Paulo",
+		os.Getenv("DB_HOST"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_NAME"), os.Getenv("DB_PORT"))
 
 	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
