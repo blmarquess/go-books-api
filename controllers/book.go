@@ -123,3 +123,24 @@ func UpdateBook(ctx *gin.Context) {
 
 	ctx.JSON(http.StatusAccepted, book)
 }
+
+func DeleteBook(ctx *gin.Context) {
+	db := database.GetDBInstance()
+
+	id, err := strconv.Atoi(ctx.Param("id"))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"message": "Id must be an integer",
+		})
+		return
+	}
+
+	if err := db.Delete(&models.Book{}, id).Error; err != nil {
+		ctx.JSON(http.StatusNotFound, gin.H{
+			"message": "Book not found",
+		})
+		return
+	}
+
+	ctx.JSON(http.StatusNoContent, gin.H{})
+}
