@@ -43,7 +43,34 @@ Entre na pasta do projeto e executo o docker compose:
 
 ```shell
 cd go-books-api
-docker-compose up --build
+
+docker compose up --build
+```
+
+> obs: quem utilizar docker compose v1 utilizar o comando: docker-compose up --build
+
+Outra opção é usar os comando:
+
+- Iniciar a aplicação
+
+```shell
+make run
+```
+
+- Parar a aplicação
+
+```shell
+make stop
+```
+
+- Testar a aplicação
+
+```shell
+# Listar todos os livros
+make test-all
+
+# Listar apenas o livro de id 1
+make test-one
 ```
 
 O projeto esta configurado para iniciar na porta 8000 da maquina hospedeira
