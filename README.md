@@ -43,7 +43,7 @@ Entre na pasta do projeto e executo o docker compose:
 
 ```shell
 cd go-books-api
-docker-compose up --build
+docker compose up --build
 ```
 
 O projeto esta configurado para iniciar na porta 8000 da maquina hospedeira
