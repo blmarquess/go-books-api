@@ -3,20 +3,16 @@ package models
 import (
 	"errors"
 	"strings"
-	"time"
 
 	"gorm.io/gorm"
 )
 
 type Book struct {
-	Id        int            `json:"id" gorm:"primary_key"`
-	Titulo    string         `json:"título"`
-	Categoria string         `json:"categoria"`
-	Autor     string         `json:"autor"`
-	Sinopse   string         `json:"sinopse"`
-	CreatedAt time.Time      `json:"created"`
-	UpdatedAt time.Time      `json:"updated"`
-	DeletedAt gorm.DeletedAt `gorm:"index" json:"deleted"`
+	gorm.Model
+	Titulo    string `json:"título" gorm:"not null"`
+	Categoria string `json:"categoria" gorm:"not null"`
+	Autor     string `json:"autor" gorm:"not null"`
+	Sinopse   string `json:"sinopse" gorm:"not null"`
 }
 
 func (b *Book) hasInvalidFields() error {

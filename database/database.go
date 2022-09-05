@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/blmarquess/go-books-api/database/seeds"
 	"github.com/blmarquess/go-books-api/models"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -23,7 +24,11 @@ func StartDB() {
 
 	db = database
 	db.AutoMigrate(models.Book{})
-	log.Println("Database connection successful")
+	log.Println("Database connection successful\n Seeding database...")
+
+	seeds.Books(db)
+
+	log.Println("Seeds Done!\n Database Online.")
 }
 
 func GetDBInstance() *gorm.DB {
