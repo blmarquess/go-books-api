@@ -7,12 +7,12 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: password
-      POSTGRES_USER: golang
+      POSTGRES_USER: postgres
       POSTGRES_DB: books
     volumes:
       - ./seeds/api_books.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U golang" ]
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       timeout: 10s
       retries: 5
       interval: 30s
@@ -26,7 +26,7 @@ services:
     environment:
       DB_HOST: db_postgres
       DB_PORT: 5432
-      DB_USER: golang
+      DB_USER: postgres
       DB_PASSWORD: password
       DB_NAME: books
       PORT: 8000
