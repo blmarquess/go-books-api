@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 
@@ -18,7 +17,6 @@ func GetAllBooks(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Internal Server Error",
 		})
-		log.Println(err)
 		return
 	}
 
@@ -42,7 +40,6 @@ func GetBook(ctx *gin.Context) {
 		ctx.JSON(http.StatusNotFound, gin.H{
 			"message": "Book not found",
 		})
-		log.Println(err)
 		return
 	}
 
@@ -71,7 +68,6 @@ func CreateBook(ctx *gin.Context) {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Error on save data" + err.Error(),
 		})
-		log.Println(err)
 		return
 	}
 
@@ -94,7 +90,6 @@ func UpdateBook(ctx *gin.Context) {
 		ctx.JSON(http.StatusNotFound, gin.H{
 			"message": "Book not found",
 		})
-		log.Println(err)
 		return
 	}
 
@@ -112,11 +107,10 @@ func UpdateBook(ctx *gin.Context) {
 		return
 	}
 
-	if err := db.Save(&book).Error; err != nil {
+	if err := db.Model(&book).UpdateColumns(book).Error; err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{
 			"message": "Error on save data" + err.Error(),
 		})
-		log.Println(err)
 		return
 	}
 
