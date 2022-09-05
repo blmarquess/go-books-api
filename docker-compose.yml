@@ -8,9 +8,9 @@ services:
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: golang
-      POSTGRES_DB: books_api
+      POSTGRES_DB: books
     volumes:
-      - ./docker/api_books.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
+      - ./seeds/api_books.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       timeout: 10s
@@ -28,7 +28,7 @@ services:
       DB_PORT: 5432
       DB_USER: golang
       DB_PASSWORD: password
-      DB_NAME: books_api
+      DB_NAME: books
       PORT: 8000
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8000/books" ]
