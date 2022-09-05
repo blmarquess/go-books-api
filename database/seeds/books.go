@@ -67,6 +67,7 @@ func Books(db *gorm.DB) {
 			Titulo:    "scrum",
 			Categoria: "scrum",
 			Autor:     "rafael sabbagh",
+			Sinopse:   "como implementar o scrum em sua empresa",
 		},
 	}
 
