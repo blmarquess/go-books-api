@@ -81,9 +81,8 @@ func CreateBook(ctx *gin.Context) {
 func UpdateBook(ctx *gin.Context) {
 	db := database.GetDBInstance()
 	var book models.Book
-	log.Println("UpdateBook")
-	id, err := strconv.Atoi(ctx.Param("id"))
 
+	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"message": "Id must be an integer",
