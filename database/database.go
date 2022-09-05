@@ -18,8 +18,7 @@ func StartDB() {
 
 	database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
-		log.Println("Could not connect to the Postgres Database")
-		log.Fatal("Error: ", err)
+		log.Fatal("Could not connect to the Postgres Database\n Error: ", err)
 	}
 
 	db = database

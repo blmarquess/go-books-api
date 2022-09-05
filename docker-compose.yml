@@ -30,6 +30,7 @@ services:
       DB_PASSWORD: password
       DB_NAME: books
       PORT: 8000
+      GIN_MODE: release
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8000/books" ]
       timeout: 10s
