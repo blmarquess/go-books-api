@@ -9,6 +9,8 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: golang
       POSTGRES_DB: books_api
+    volumes:
+      - ./docker/api_books.sql:/docker-entrypoint-initdb.d/docker-database-initial.sql
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       timeout: 10s
